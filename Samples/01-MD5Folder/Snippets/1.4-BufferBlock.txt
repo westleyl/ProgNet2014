@@ -16,7 +16,6 @@ namespace ActorsLifeForMe.MD5Folder
 
             ProcessFolder(@"N:\iPlayer Recordings\Films");
 
-            Console.WriteLine("Completed.");
             Console.ReadLine();
         }
 
@@ -36,8 +35,8 @@ namespace ActorsLifeForMe.MD5Folder
             {
                 var createMD5Block = new TransformBlock<string, Tuple<string, string>>(filename => MD5WithFilename(filename),
                         blockConfigurationOneItemAtATime);
-                bufferBlock.LinkTo(createMD5Block, new DataflowLinkOptions() {PropagateCompletion = true});
-                createMD5Block.LinkTo(displayMD5Block, new DataflowLinkOptions() {PropagateCompletion = true});
+                bufferBlock.LinkTo(createMD5Block);
+                createMD5Block.LinkTo(displayMD5Block);
 
                 createBlocks.Add(createMD5Block);
             }
@@ -47,9 +46,6 @@ namespace ActorsLifeForMe.MD5Folder
             {
                 bufferBlock.Post(filepath);
             }
-
-            bufferBlock.Complete();
-            displayMD5Block.Completion.Wait();
         }
 
         private static Tuple<string,string> MD5WithFilename(string filepath)

@@ -37,9 +37,9 @@ namespace ActorsLifeForMe.MD5Folder
                 var createMD5Block = new TransformBlock<string, Tuple<string, string>>(filename => MD5WithFilename(filename),
                         blockConfigurationOneItemAtATime);
 
-                folderContentsBlock.LinkTo(createMD5Block, new DataflowLinkOptions() { PropagateCompletion = true }, predicate:IsFile);
+                folderContentsBlock.LinkTo(createMD5Block, predicate:IsFile);
 
-                createMD5Block.LinkTo(displayMD5Block, new DataflowLinkOptions() { PropagateCompletion = true });
+                createMD5Block.LinkTo(displayMD5Block);
 
                 createBlocks.Add(createMD5Block);
             }
