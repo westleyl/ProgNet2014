@@ -14,7 +14,7 @@ namespace ActorsLifeForMe.MD5Folder
             Console.WriteLine("Ready to start.");
             Console.ReadLine();
 
-            ProcessFolder(@"N:\iPlayer Recordings\Films");
+            ProcessFolder(@"N:\iPlayer Recordings\ProgNet");
 
             Console.ReadLine();
         }
